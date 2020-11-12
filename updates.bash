@@ -1,27 +1,27 @@
 #!/usr/bin/env bash
 # This script is specific to my system, but I'm putting it up as a code snippet.
 echo "-------------------"
-#Uncomment the one you need for your package manager
+# Uncomment the one you need for your package manager
 
-#dnf
+# dnf
 #sudo dnf upgrade
 
-#Figure out the zypper equivalent.
+# Figure out the zypper equivalent.
 
-#Use this for apt
+# apt
 #sudo apt update
 #echo "-------------------"
 #sudo apt dist-upgrade
 
-#pacman
+# pacman
 # MOUNT THE EFI PARTITION! So the boot files write properly.
 sudo mount /dev/sda1 /efi
 sudo pacman -Syyu
 
-#AUR-specific commands
-#Replace the directory with the directory your AUR packages live in.
+# AUR-specific commands
+# Replace the directory with the directory your AUR packages live in.
 AURDIR=~/AUR
-#cd into each directory, do a git pull, rebuild if necessary.
+# cd into each directory, do a git pull, rebuild if necessary.
 echo "--------------------"
 echo "Updating AUR packages..."
 cd $AURDIR
@@ -57,16 +57,16 @@ sudo umount /efi
 echo "-------------------"
 sudo freshclam
 
-#Snap refresh
+# Snap refresh
 #echo "-------------------"
 #sudo snap refresh
 
-#TeXLive updater. Start with updating the updater.
+# TeXLive updater. Start with updating the updater.
 echo "-------------------"
 sudo tlmgr update --self
-#Then look for package updates.
+# Then look for package updates.
 echo "-------------------"
 sudo tlmgr update -all
 
-#Finish message
+# Finish message
 echo "Done. Reboot if necessary."
