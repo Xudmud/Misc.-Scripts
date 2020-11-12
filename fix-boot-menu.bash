@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Quick script to reinstall grub, in case the EFI menu gets overwritten.
-# ONLY RUN THIS IN A LIVE BOOT
+# ONLY RUN THIS IN A LIVE BOOT AS CHROOT
 ESP=/efi
 
 # First mount the EFI partition
