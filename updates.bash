@@ -53,6 +53,10 @@ done
 # Unmount the EFI partition, we're done with it.
 sudo umount /efi
 
+# Update ClamAV definitions
+echo "-------------------"
+sudo freshclam
+
 #Snap refresh
 #echo "-------------------"
 #sudo snap refresh
