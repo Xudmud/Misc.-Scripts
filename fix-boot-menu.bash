@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 # Quick script to reinstall grub, in case the EFI menu gets overwritten.
 # ONLY RUN THIS IN A LIVE BOOT AS CHROOT
+# Substitute with your EFI mount location and your EFI partition
 ESP=/efi
+EFIPART=/dev/sda1
 
 # First mount the EFI partition
-mount /dev/sda1 $ESP
+mount $EFIPART $ESP
 
 # Next install grub
 grub-install --target=x86_64-efi --efi=directory=$ESP --bootloader-id=arch
