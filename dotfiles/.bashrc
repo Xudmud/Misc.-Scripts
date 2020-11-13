@@ -1,1 +1,0 @@
-/home/xudmud/.bashrc
