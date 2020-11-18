@@ -25,6 +25,7 @@ alias egrep='egrep --color=auto'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias li='ls -lia'
 
 # Prompt design
 PS1='\[\033[01;01m\]$?|\[\033[1;38;5;214m\]\u@\h\[\033[00m\] \w: \$ '
