@@ -18,10 +18,13 @@ echo "-------------------"
 sudo mount /dev/sda1 /efi
 sudo pacman -Syyu
 
+# Set the start directory to where the command was invoked.
+STARTDIR=$PWD
+
 # AUR-specific commands
 # Replace the directory with the directory your AUR packages live in.
 AURDIR=~/AUR
-# cd into each directory, do a git pull, rebuild if necessary.
+# cd into each AUR directory, do a git pull, rebuild if necessary.
 echo "--------------------"
 echo "Updating AUR packages..."
 cd $AURDIR
@@ -49,6 +52,9 @@ do
         fi
     fi
 done
+
+# Go back to the start directory.
+cd $STARTDIR
 
 # Unmount the EFI partition, we're done with it.
 sudo umount /efi
