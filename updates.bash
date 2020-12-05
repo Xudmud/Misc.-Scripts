@@ -16,7 +16,7 @@ echo "-------------------"
 # pacman
 # MOUNT THE EFI PARTITION! So the boot files write properly.
 sudo mount /dev/sda1 /efi
-sudo pacman -Syyu
+sudo pacman -Syu
 
 # Set the start directory to where the command was invoked.
 STARTDIR=$PWD
