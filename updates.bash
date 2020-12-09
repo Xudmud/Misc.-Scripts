@@ -74,5 +74,16 @@ sudo tlmgr update --self
 echo "-------------------"
 sudo tlmgr update -all
 
-# Finish message
-echo "Done. Reboot if necessary."
+# Reboot should only be necessary if there was a kernel update.
+# Check if there was one.
+CURVER=$(uname -r)
+PACVER=$(pacman -Q linux | awk '{print $2}')
+if [ $CURVER == $PACVER ]
+then
+    # If no kernel update, just print done.
+    echo "Done!"
+else
+    # If there was a kernel update, prompt the user to reboot.
+    printf "Done! \033[0;31mKernel updated, please reboot.\n\033[00m"
+fi
+
