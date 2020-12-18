@@ -78,12 +78,12 @@ sudo tlmgr update -all
 # Check if there was one.
 CURVER=$(uname -r)
 PACVER=$(pacman -Q linux | awk '{print $2}')
-if [ $CURVER == $PACVER ]
-then
-    # If no kernel update, just print done.
-    echo "Done!"
-else
-    # If there was a kernel update, prompt the user to reboot.
-    printf "Done! \033[0;31mKernel updated, please reboot.\n\033[00m"
-fi
-
+#if [ $CURVER == $PACVER ]
+#then
+#    # If no kernel update, just print done.
+#    echo "Done!"
+#else
+#    # If there was a kernel update, prompt the user to reboot.
+#    printf "Done! \033[0;31mKernel updated, please reboot.\n\033[00m"
+#fi
+echo "Done!"
