@@ -7,6 +7,7 @@ echo "-------------------"
 #sudo dnf upgrade
 
 # Figure out the zypper equivalent.
+#sudo zypper up
 
 # apt
 #sudo apt update
@@ -74,10 +75,20 @@ sudo tlmgr update --self
 echo "-------------------"
 sudo tlmgr update -all
 
+echo "-------------------"
 # Reboot should only be necessary if there was a kernel update.
 # Check if there was one.
 CURVER=$(uname -r)
 PACVER=$(pacman -Q linux | awk '{print $2}')
+
+# Output the results from uname -r and pacman -Q linux.
+echo "Kernel versions reported:"
+echo "uname:  $CURVER"
+echo "pacman: $PACVER"
+echo "If the versiosn are different, please reboot!"
+
+# uname -r and pacman -Q linux have slightly different outputs.
+# TODO: Compare just the numeric version numbers. At worst, has to be done visually.
 #if [ $CURVER == $PACVER ]
 #then
 #    # If no kernel update, just print done.
