@@ -85,7 +85,7 @@ PACVER=$(pacman -Q linux | awk '{print $2}')
 echo "Kernel versions reported:"
 echo "uname:  $CURVER"
 echo "pacman: $PACVER"
-echo "If the versiosn are different, please reboot!"
+echo "If the versions are different, please reboot!"
 
 # uname -r and pacman -Q linux have slightly different outputs.
 # TODO: Compare just the numeric version numbers. At worst, has to be done visually.
