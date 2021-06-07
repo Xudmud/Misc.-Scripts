@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# This script is specific to my system, but I'm putting it up as a code snippet.
+# This script is specific to my system and needs, 
 echo "-------------------"
 # Uncomment the one you need for your package manager
 
@@ -44,13 +44,28 @@ do
         then
             # Merge and rebuild
             git merge
-            makepkg -si
+            # TODO: Tweak to work with split packages.
+            if [ $PWD == "/home/xudmud/AUR/discord-rpc-api" ]
+            then
+                # discord-rpc-api generates two packages: discord-rpc-api and discord-rpc-api-static.
+                # Only one of these can be installed at once, so the user needs to manually install one.
+                # Just generate the packages but don't install anything.
+                makepkg -s
+                echo "discord-rpc-api requires update. Manually run pacman -U."
+            else
+                makepkg -si
+            fi
             # Return to the main AUR directory
             cd ..
+        # OpenRCT2 has build updates that don't necessarily affect the AUR package. Always try to update.
+        elif [ $PWD == "/home/xudmud/AUR/openrct2-git" ]
+        then
+            git merge
+            makepkg -si
         else
             echo "Up to date"
-            cd ..
         fi
+        cd ..
     fi
 done
 
