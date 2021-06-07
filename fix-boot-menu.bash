@@ -9,7 +9,7 @@ EFIPART=/dev/sda1
 mount $EFIPART $ESP
 
 # Next install grub
-grub-install --target=x86_64-efi --efi=directory=$ESP --bootloader-id=arch
+grub-install --target=x86_64-efi --efi-directory=$ESP --bootloader-id=arch
 
 # Now run the config.
 grub-mkconfig -o /boot/grub/grub.cfg
