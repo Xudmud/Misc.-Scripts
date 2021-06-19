@@ -31,7 +31,7 @@ echo "Updating AUR packages..."
 cd $AURDIR
 for D in `find . -maxdepth 1 -type d`
 do
-    if [ $D != '.' ] && [ $D != '..' ]
+    if [ $D != '.' ] && [ $D != '..' ] && [ $D != './IGNORE' ]
     then
         cd $D
         echo $D
