@@ -55,8 +55,6 @@ do
             else
                 makepkg -si
             fi
-            # Return to the main AUR directory
-            cd ..
         # OpenRCT2 has build updates that don't necessarily affect the AUR package. Always try to update.
         elif [ $PWD == "/home/xudmud/AUR/openrct2-git" ]
         then
