@@ -29,46 +29,47 @@ AURDIR=~/AUR
 echo "--------------------"
 echo "Updating AUR packages..."
 cd $AURDIR
-for D in `find . -maxdepth 1 -type d`
+for D in $(find . -maxdepth 1 -type d)
 do
-    if [ $D != '.' ] && [ $D != '..' ] && [ $D != './IGNORE' ]
+    if [ "$D" != "." ] && [ "$D" != ".." ] && [ "$D" != "./IGNORE" ]
     then
-        cd $D
-        echo $D
-        # Do a fetch.
-        git fetch
-        # Check if a merge/rebuild is needed by comparing heads
-        HEADHASH=$(git rev-parse HEAD)
-        UPSTREAMHASH=$(git rev-parse master@{upstream})
-        if [ "$HEADHASH" != "$UPSTREAMHASH" ]
-        then
-            # Merge and rebuild
-            git merge
-            # TODO: Tweak to work with split packages.
-            if [ $PWD == "/home/xudmud/AUR/discord-rpc-api" ]
+        (
+            cd "$D"
+            echo "$D"
+            # Do a fetch.
+            git fetch
+            # Check if a merge/rebuild is needed by comparing heads
+            HEADHASH=$(git rev-parse HEAD)
+            UPSTREAMHASH=$(git rev-parse master@{upstream})
+            if [ "$HEADHASH" != "$UPSTREAMHASH" ]
             then
-                # discord-rpc-api generates two packages: discord-rpc-api and discord-rpc-api-static.
-                # Only one of these can be installed at once, so the user needs to manually install one.
-                # Just generate the packages but don't install anything.
-                makepkg -s
-                echo "discord-rpc-api requires update. Manually run pacman -U."
-            else
+                # Merge and rebuild
+                git merge
+                # TODO: Tweak to work with split packages.
+                if [ "$PWD" == "/home/xudmud/AUR/discord-rpc-api" ]
+                then
+                    # discord-rpc-api generates two packages: discord-rpc-api and discord-rpc-api-static.
+                    # Only one of these can be installed at once, so the user needs to manually install one.
+                    # Just generate the packages but don't install anything.
+                    makepkg -s
+                    echo "discord-rpc-api requires update. Manually run pacman -U."
+                else
+                    makepkg -si
+                fi
+            # OpenRCT2 has build updates that don't necessarily affect the AUR package. Always try to update.
+            elif [ "$PWD" == "/home/xudmud/AUR/openrct2-git" ]
+            then
+                git merge
                 makepkg -si
+            else
+                echo "Up to date"
             fi
-        # OpenRCT2 has build updates that don't necessarily affect the AUR package. Always try to update.
-        elif [ $PWD == "/home/xudmud/AUR/openrct2-git" ]
-        then
-            git merge
-            makepkg -si
-        else
-            echo "Up to date"
-        fi
-        cd ..
+        )
     fi
 done
 
 # Go back to the start directory.
-cd $STARTDIR
+cd "$STARTDIR"
 
 # Unmount the EFI partition, we're done with it.
 sudo umount /efi
