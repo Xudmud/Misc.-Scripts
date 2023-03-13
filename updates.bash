@@ -17,6 +17,11 @@ echo "-------------------"
 # pacman
 # MOUNT THE EFI PARTITION! So the boot files write properly.
 sudo mount /dev/sda1 /efi
+# Always update archlinux-keyring first
+# This will throw a warning if there's no new version, but that's normal behavior.
+sudo pacman -Sy archlinux-keyring --needed
+
+# Then the full pacman update.
 sudo pacman -Syu
 
 # Set the start directory to where the command was invoked.
